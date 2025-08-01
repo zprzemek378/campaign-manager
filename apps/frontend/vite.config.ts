@@ -10,4 +10,15 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "../../packages/shared-types"),
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+        @use "sass:color";
+        @import "${path.resolve(__dirname, "src/assets/styles/_variables.scss")}";
+        @import "${path.resolve(__dirname, "src/assets/styles/_mixins.scss")}";
+        `,
+      },
+    },
+  },
 });
