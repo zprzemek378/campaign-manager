@@ -1,4 +1,5 @@
 .list {
   display: flex;
-  gap: 3rem;
+  flex-wrap: wrap;
+  margin: 1rem;
 }

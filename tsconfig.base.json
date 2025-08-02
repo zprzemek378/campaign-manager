@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@shared/*": ["packages/shared-types/*"]
+      "@shared/*": ["packages/shared-types/*"],
+      "@utils/*": ["apps/frontend/src/utils/*"]
     }
   }
 }

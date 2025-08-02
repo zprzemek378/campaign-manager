@@ -3,9 +3,11 @@ import CampaignCard from "./components/CampaignCard/CampaignCard";
 
 import styles from "./CampaignList.module.scss";
 import { CampaignType } from "@shared/types";
+import { useState } from "react";
 
 const exampleCampaigns: CampaignType[] = [
   {
+    id: "d1a58c3e-22b0-4f74-b8dc-d54b679ac12e",
     name: "Summer Sale NYC",
     keyWords: ["summer", "sale", "clothing"],
     bidAmount: 0.5,
@@ -15,6 +17,7 @@ const exampleCampaigns: CampaignType[] = [
     radiusInKm: 15,
   },
   {
+    id: "fa76a294-9327-41f2-a109-622b25b5665f",
     name: "Berlin Electronics Promo",
     keyWords: ["electronics", "gadgets", "discount"],
     bidAmount: 0.75,
@@ -24,6 +27,7 @@ const exampleCampaigns: CampaignType[] = [
     radiusInKm: 20,
   },
   {
+    id: "9f08b0b6-9cf1-4ae3-8127-9dd25a2fa2e0",
     name: "Tokyo Fashion Week",
     keyWords: ["fashion", "tokyo", "runway"],
     bidAmount: 1.2,
@@ -33,8 +37,9 @@ const exampleCampaigns: CampaignType[] = [
     radiusInKm: 10,
   },
   {
+    id: "ef3a2046-7905-4bb7-8ff4-f1d1ab5d609e",
     name: "London Books Push",
-    keyWords: ["books", "reading", "education"],
+    keyWords: ["books", "reading", "education", "runway", "tokyo", "fashion"],
     bidAmount: 0.3,
     campaignFund: 80,
     isActive: true,
@@ -42,6 +47,7 @@ const exampleCampaigns: CampaignType[] = [
     radiusInKm: 25,
   },
   {
+    id: "3c1ef4df-933e-45c7-8d6e-f308b94a6f4e",
     name: "LA Home Decor Boost",
     keyWords: ["home", "decor", "interior"],
     bidAmount: 0.6,
@@ -53,11 +59,21 @@ const exampleCampaigns: CampaignType[] = [
 ];
 
 const CampaignList = () => {
+  const [currentlyExpanded, setCurrentlyExpanded] = useState<string | null>(
+    null
+  );
+
   return (
-    <MainLayout className={styles.list}>
-      {exampleCampaigns.map((c) => (
-        <CampaignCard campaign={c} />
-      ))}
+    <MainLayout>
+      <div className={styles.list}>
+        {exampleCampaigns.map((c) => (
+          <CampaignCard
+            campaign={c}
+            expanded={currentlyExpanded === c.id}
+            setCurrentlyExpanded={setCurrentlyExpanded}
+          />
+        ))}
+      </div>
     </MainLayout>
   );
 };

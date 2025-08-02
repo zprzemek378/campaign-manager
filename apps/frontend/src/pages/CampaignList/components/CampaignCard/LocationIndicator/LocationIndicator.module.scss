@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: $bg-color;
+  border: 1px solid $primary-color;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+
+  font-size: 0.875rem;
+  color: $text-color;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: lightly-lighten($bg-color);
+  }
+}
+
+.townName {
+  font-weight: 700;
+}
+
+.distance {
+  font-weight: 500;
+  color: #718096;
+  font-size: 0.75rem;
+}
