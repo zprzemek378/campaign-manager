@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "@shared/*": ["packages/shared-types/*"],
-      "@utils/*": ["apps/frontend/src/utils/*"]
+      "@utils/*": ["apps/frontend/src/utils/*"],
+      "@ui/*": ["apps/frontend/src/ui/*"]
     }
   }
 }

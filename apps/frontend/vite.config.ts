@@ -9,6 +9,7 @@ export default defineConfig({
     alias: {
       "@shared": path.resolve(__dirname, "../../packages/shared-types"),
       "@utils": path.resolve(__dirname, "src/utils"),
+      "@ui": path.resolve(__dirname, "src/ui"),
     },
   },
   css: {

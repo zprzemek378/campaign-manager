@@ -1,0 +1,15 @@
+.toggleButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 0.15s;
+  border-radius: 4px;
+  outline: none;
+}
+.toggleButton:focus-visible {
+  box-shadow: 0 0 0 2px $accent-color;
+}

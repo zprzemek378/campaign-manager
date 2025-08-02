@@ -6,7 +6,9 @@ import MoneyView from "./components/MoneyView/MoneyView";
 import StatusIndicator from "./components/StatusIndicator/StatusIndicator";
 import LocationIndicator from "./LocationIndicator/LocationIndicator";
 import { FaMoneyBillWave, FaCoins } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 import { useLayoutEffect, useRef } from "react";
+import EditCampaignDialog from "./components/EditCampaignDialog/EditCampaignDialog";
 
 type CampaignCardProps = {
   campaign: CampaignType;
@@ -73,7 +75,20 @@ const CampaignCard = ({
         </div>
       </div>
 
-      <div className={styles.expandIconWrapper}>
+      <div className={styles.iconsWrapper}>
+        <div className={styles.editDeleteIcons}>
+          <button>
+            <EditCampaignDialog
+              campaign={campaign}
+              onSave={() => {
+                console.log("TODO");
+              }}
+            />
+          </button>
+          <button>
+            <MdDelete size={20} />
+          </button>
+        </div>
         <button
           onClick={toggleCurrentlyExpanded}
           className={clsx(styles.expandIcon, expanded && styles.expanded)}

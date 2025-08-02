@@ -42,15 +42,24 @@
   color: $primary-color;
 }
 
-.expandIconWrapper {
+.iconsWrapper {
   display: flex;
-  justify-content: end;
-  margin-top: auto;
+  justify-content: space-between;
+  margin-top: 1rem;
+  align-items: center;
 
-  .expandIcon {
+  button {
     all: unset;
     cursor: pointer;
+  }
 
+  .editDeleteIcons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .expandIcon {
     transition: transform 0.3s ease;
 
     &.expanded {
