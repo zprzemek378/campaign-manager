@@ -68,9 +68,11 @@ const Keywords = ({ value, onChange }: KeywordsProps) => {
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}
             onKeyDown={(e) => {
-              if (e.key === "Enter" && input.trim()) {
+              if (e.key === "Enter") {
                 e.preventDefault();
-                handleAdd(input.trim());
+                if (input.trim()) {
+                  handleAdd(input.trim());
+                }
               }
             }}
           />
