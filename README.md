@@ -1,135 +1,112 @@
-# Turborepo starter
+# Campaign Manager
 
-This Turborepo starter is maintained by the Turborepo core team.
+A full-stack application for managing marketing campaigns built with React, Express, and PostgreSQL.
 
-## Using this example
+## Prerequisites
 
-Run the following command:
+- Node.js >= 18
+- pnpm >= 9.0.0
+- Docker and Docker Compose
 
-```sh
-npx create-turbo@latest
+## Project Structure
+
+This monorepo contains the following applications and packages:
+
+### Apps
+
+- `apps/frontend`: React + Vite application for the user interface
+- `apps/backend`: Express.js + Prisma backend API
+
+### Packages
+
+- `packages/shared-types`: Shared TypeScript interfaces and types
+- `packages/eslint-config`: Shared ESLint configurations
+- `packages/typescript-config`: Shared TypeScript configurations
+
+## Getting Started
+
+1. Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/zprzemek378/campaign-manager.git
+cd campaign-manager
+pnpm install
 ```
 
-## What's inside?
+2. Set up environment variables:
 
-This Turborepo includes the following packages/apps:
+For the backend (`apps/backend/.env`):
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+```bash
+cp apps/backend/.env.example apps/backend/.env
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+```properties
+PORT=3001
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/campaign_db
+FRONTEND_URL=localhost:5137
 ```
 
-### Develop
+For the frontend (`apps/frontend/.env`):
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+```bash
+cp apps/frontend/.env.example apps/frontend/.env
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+```properties
+VITE_API_URL=http://localhost:3001/api
 ```
 
-### Remote Caching
+3. Start the development environment:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+```bash
+pnpm dev
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+This command will:
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+- Start PostgreSQL in Docker
+- Run Prisma migrations
+- Start the backend server
+- Start the frontend development server
 
+## Development
+
+### Available Commands
+
+- `pnpm dev` - Start the development environment (database, backend, and frontend)
+- `pnpm build` - Build all applications
+- `pnpm lint` - Run ESLint across all projects
+- `pnpm format` - Format all files with Prettier
+
+### Individual Components
+
+You can also run components individually:
+
+#### Database
+
+```bash
+# Start PostgreSQL in Docker
+pnpm run start:docker
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+#### Backend
+
+```bash
+cd apps/backend
+pnpm dev
 ```
 
-## Useful Links
+#### Frontend
 
-Learn more about the power of Turborepo:
+```bash
+cd apps/frontend
+pnpm dev
+```
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+## Technologies Used
+
+- **Frontend**: React, Vite, TypeScript, SCSS Modules
+- **Backend**: Express.js, Prisma, TypeScript
+- **Database**: PostgreSQL (via Docker)
+- **Build Tools**: Turborepo, pnpm workspaces
