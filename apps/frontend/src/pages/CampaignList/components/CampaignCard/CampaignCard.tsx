@@ -9,6 +9,7 @@ import { FaMoneyBillWave, FaCoins, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useLayoutEffect, useRef } from "react";
 import EditCampaignDialog from "../../../../ui/EditCampaignDialog/EditCampaignDialog";
+import Pill from "@ui/Pill/Pill";
 
 type CampaignCardProps = {
   campaign: CampaignType;
@@ -52,7 +53,7 @@ const CampaignCard = ({
       </div>
       <div className={styles.keyWordList}>
         {campaign.keyWords.map((k) => (
-          <div className={styles.keyWord}>{k}</div>
+          <Pill text={k} />
         ))}
       </div>
 

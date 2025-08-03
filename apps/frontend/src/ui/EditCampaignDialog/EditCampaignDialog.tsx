@@ -8,6 +8,7 @@ import {
 } from "@ui/CustomDialog/DialogFormControls";
 import { useState, useRef } from "react";
 import ToggleCheckbox from "@ui/ToggleCheckbox/ToggleCheckbox";
+import Keywords from "./components/Keywords/Keywords";
 
 const dialogProps = {
   false: {
@@ -111,16 +112,14 @@ const EditCampaignDialog = ({
             required
           />
         </DialogFieldset>
-        <DialogFieldset>
-          <DialogLabel htmlFor="keyWords">Keywords</DialogLabel>
-          <DialogInput
-            id="keyWords"
-            name="keyWords"
-            value={form.keyWords.join(", ")}
-            onChange={handleKeywordsChange}
-            placeholder="np. summer, sale, clothing"
-          />
-        </DialogFieldset>
+
+        <Keywords
+          value={form.keyWords}
+          onChange={(newKeywords) =>
+            setForm((prev) => ({ ...prev, keyWords: newKeywords }))
+          }
+        />
+
         <DialogFieldset>
           <DialogLabel htmlFor="bidAmount">Bid amount</DialogLabel>
           <DialogInput

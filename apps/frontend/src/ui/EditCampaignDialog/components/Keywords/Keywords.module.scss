@@ -1,0 +1,37 @@
+.wrapper {
+  position: relative;
+}
+
+.keywordList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(50% - 0.0625rem);
+  left: calc(90px + 1.25rem);
+  right: 0;
+  background-color: white;
+  z-index: 10;
+  max-height: 10rem;
+  overflow-y: auto;
+  border-radius: 0 0 0.375rem 0.375rem;
+
+  box-shadow:
+    -2px 0 0 0 lightly-lighten($accent-color),
+    2px 0 0 0 lightly-lighten($accent-color),
+    0 2px 0 0 lightly-lighten($accent-color);
+}
+
+.suggestionItem {
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: $primary-color;
+
+  &:hover {
+    background-color: $bg-color;
+  }
+}

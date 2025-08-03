@@ -21,3 +21,16 @@ export const TOWNS = [
   { id: "af-cai", name: "Cairo" },
   { id: "sa-sao", name: "São Paulo" },
 ] as const;
+
+export const PREDEFINED_KEYWORDS = [
+  "summer",
+  "sale",
+  "clothing",
+  "fashion",
+  "discount",
+  "shoes",
+  "adventure",
+  "sports",
+  "eco",
+  "luxury",
+];
