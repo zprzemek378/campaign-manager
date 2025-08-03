@@ -15,7 +15,11 @@ export const createCampaign = asyncHandler(
 
 export const getCampaigns = asyncHandler(
   async (_req: Request, res: Response) => {
-    const campaigns = await prisma.campaign.findMany();
+    const campaigns = await prisma.campaign.findMany({
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
     res.json(campaigns);
   }
 );
