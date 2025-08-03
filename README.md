@@ -44,7 +44,7 @@ cp apps/backend/.env.example apps/backend/.env
 ```properties
 PORT=3001
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/campaign_db
-FRONTEND_URL=localhost:5137
+FRONTEND_URL=localhost:5173
 ```
 
 For the frontend (`apps/frontend/.env`):
