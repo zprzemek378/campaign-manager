@@ -75,13 +75,6 @@ const EditCampaignDialog = ({
     }));
   };
 
-  const handleKeywordsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm((prev: CampaignType) => ({
-      ...prev,
-      keyWords: e.target.value.split(",").map((kw) => kw.trim()),
-    }));
-  };
-
   const handleSave = () => {
     onSave(form);
     setOpen(false);

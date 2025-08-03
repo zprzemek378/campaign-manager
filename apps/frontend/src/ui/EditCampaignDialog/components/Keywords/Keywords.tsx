@@ -50,7 +50,7 @@ const Keywords = ({ value, onChange }: KeywordsProps) => {
         <DialogLabel />
         <div className={styles.keywordList}>
           {value.map((k) => (
-            <Pill text={k} onRemove={handleRemove} />
+            <Pill key={k} text={k} onRemove={handleRemove} />
           ))}
         </div>
       </DialogFieldset>
@@ -66,7 +66,6 @@ const Keywords = ({ value, onChange }: KeywordsProps) => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
-            // onBlur={() => setTimeout(() => setShowSuggestions(false), 150)}
             onBlur={() => setShowSuggestions(false)}
             onKeyDown={(e) => {
               if (e.key === "Enter" && input.trim()) {
@@ -74,7 +73,6 @@ const Keywords = ({ value, onChange }: KeywordsProps) => {
                 handleAdd(input.trim());
               }
             }}
-            required
           />
         </DialogFieldset>
 

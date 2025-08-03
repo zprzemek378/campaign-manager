@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Campaign {
+  id           String   @id @default(uuid())
+  name         String
+  keyWords     String[]
+  bidAmount    Float
+  campaignFund Float
+  isActive     Boolean  @default(false)
+  town         String
+  radiusInKm   Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}

@@ -15,12 +15,16 @@ type CampaignCardProps = {
   campaign: CampaignType;
   expanded: boolean;
   setCurrentlyExpanded: React.Dispatch<React.SetStateAction<string | null>>;
+  onUpdate: (updates: Partial<CampaignType>) => void;
+  onDelete: () => void;
 };
 
 const CampaignCard = ({
   campaign,
   expanded,
   setCurrentlyExpanded,
+  onUpdate,
+  onDelete,
 }: CampaignCardProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -53,7 +57,7 @@ const CampaignCard = ({
       </div>
       <div className={styles.keyWordList}>
         {campaign.keyWords.map((k) => (
-          <Pill text={k} />
+          <Pill key={k} text={k} />
         ))}
       </div>
 
@@ -82,12 +86,11 @@ const CampaignCard = ({
             <EditCampaignDialog
               triggerElement={<FaEdit size={20} />}
               campaign={campaign}
-              onSave={() => {
-                console.log("TODO");
-              }}
+              onSave={onUpdate}
             />
           </button>
-          <button>
+          <button onClick={onDelete}>
+            {/* TODO add Are-You-Sure Dialog before deleting */}
             <MdDelete size={20} />
           </button>
         </div>
