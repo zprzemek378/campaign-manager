@@ -57,6 +57,106 @@ const exampleCampaigns: CampaignType[] = [
     town: "us-la",
     radiusInKm: 30,
   },
+  {
+    id: "1a23bc45-6789-4def-8123-456789abcdef",
+    name: "Paris Gourmet Week",
+    keyWords: ["food", "gourmet", "wine"],
+    bidAmount: 0.8,
+    campaignFund: 180,
+    isActive: true,
+    town: "eu-par",
+    radiusInKm: 12,
+  },
+  {
+    id: "2b34cd56-7890-4abc-9234-567890abcdef",
+    name: "Sydney Tech Expo",
+    keyWords: ["technology", "expo", "innovation"],
+    bidAmount: 1.0,
+    campaignFund: 250,
+    isActive: false,
+    town: "au-syd",
+    radiusInKm: 18,
+  },
+  {
+    id: "3c45de67-8901-4bcd-0345-678901abcdef",
+    name: "Toronto Winter Gear",
+    keyWords: ["winter", "clothing", "outdoor"],
+    bidAmount: 0.55,
+    campaignFund: 130,
+    isActive: true,
+    town: "ca-tor",
+    radiusInKm: 22,
+  },
+  {
+    id: "4d56ef78-9012-4cde-1456-789012abcdef",
+    name: "Madrid Art Fiesta",
+    keyWords: ["art", "festival", "culture"],
+    bidAmount: 0.7,
+    campaignFund: 160,
+    isActive: true,
+    town: "eu-mad",
+    radiusInKm: 14,
+  },
+  {
+    id: "5e67fa89-0123-4def-2567-890123abcdef",
+    name: "Dubai Luxury Cars",
+    keyWords: ["luxury", "cars", "expo"],
+    bidAmount: 1.5,
+    campaignFund: 300,
+    isActive: false,
+    town: "me-dxb",
+    radiusInKm: 25,
+  },
+  {
+    id: "6f78ab90-1234-4fab-3678-901234abcdef",
+    name: "Rome Pasta Lovers",
+    keyWords: ["pasta", "italian", "food"],
+    bidAmount: 0.4,
+    campaignFund: 90,
+    isActive: true,
+    town: "eu-rom",
+    radiusInKm: 10,
+  },
+  {
+    id: "7a89bc01-2345-4cba-4789-012345abcdef",
+    name: "Chicago Jazz Nights",
+    keyWords: ["music", "jazz", "festival"],
+    bidAmount: 0.65,
+    campaignFund: 140,
+    isActive: true,
+    town: "us-chi",
+    radiusInKm: 20,
+  },
+  {
+    id: "8b90cd12-3456-4dab-5890-123456abcdef",
+    name: "Seoul Gaming Marathon",
+    keyWords: ["gaming", "esports", "technology"],
+    bidAmount: 1.3,
+    campaignFund: 220,
+    isActive: false,
+    town: "asia-seo",
+    radiusInKm: 15,
+  },
+  {
+    id: "9c01de23-4567-4ebc-6901-234567abcdef",
+    name: "Cape Town Surf Fest",
+    keyWords: ["surfing", "beach", "festival"],
+    bidAmount: 0.5,
+    campaignFund: 110,
+    isActive: true,
+    town: "af-ct",
+    radiusInKm: 17,
+  },
+  {
+    id: "0d12ef34-5678-4fcd-7012-345678abcdef",
+    name: "Bangkok Street Food Tour",
+    keyWords: ["street food", "thai", "culture"],
+    bidAmount: 0.45,
+    campaignFund: 100,
+    isActive: true,
+    town: "asia-bkk",
+    radiusInKm: 8,
+  },
 ];
 
 const CampaignList = () => {
@@ -66,7 +166,10 @@ const CampaignList = () => {
 
   return (
     <MainLayout>
-      <Button variant="outlined">Add new campaign</Button>
+      <div className={styles.headerWrapper}>
+        <h2>Campaign List</h2>
+        <Button variant="primary">Add new campaign</Button>
+      </div>
       <div className={styles.list}>
         {exampleCampaigns.map((c) => (
           <CampaignCard
