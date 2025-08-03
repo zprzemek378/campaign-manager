@@ -1,10 +1,11 @@
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { MdCampaign } from "react-icons/md";
+import { MdCampaign, MdErrorOutline } from "react-icons/md";
 import styles from "./DataStatusMessage.module.scss";
 import clsx from "clsx";
 
 type DataStatusMessage = {
-  type: "loading" | "empty";
+  type: "loading" | "error" | "empty";
+  error?: string;
 };
 
 const MESSAGES = {
@@ -22,14 +23,18 @@ const MESSAGES = {
     h1: "No campaigns yet",
     p: "You haven't created any campaigns. Click 'Add new campaign' to get started!",
   },
+  error: {
+    icon: <MdErrorOutline className={clsx(styles.icon, styles.errorIcon)} />,
+    h1: "Something went wrong",
+  },
 };
 
-const DataStatusMessage = ({ type }: DataStatusMessage) => {
+const DataStatusMessage = ({ type, error = "" }: DataStatusMessage) => {
   return (
     <div className={styles.wrapper}>
       {MESSAGES[type].icon}
       <h1>{MESSAGES[type].h1}</h1>
-      <p>{MESSAGES[type].p}</p>
+      <p>{type === "error" ? error : MESSAGES[type].p}</p>
     </div>
   );
 };

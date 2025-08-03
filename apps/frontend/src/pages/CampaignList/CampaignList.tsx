@@ -12,8 +12,7 @@ import DataStatusMessage from "./components/DataStatusMessage/DataStatusMessage"
 const CampaignList = () => {
   const [campaigns, setCampaigns] = useState<CampaignType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  // TODO add error component
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string>("");
   const [currentlyExpanded, setCurrentlyExpanded] = useState<string | null>(
     null
   );
@@ -73,6 +72,31 @@ const CampaignList = () => {
     }
   };
 
+  const renderCampaignListContent = () => {
+    if (isLoading) {
+      return <DataStatusMessage type="loading" />;
+    }
+
+    if (error) {
+      return <DataStatusMessage type="error" error={error} />;
+    }
+
+    if (!campaigns.length) {
+      return <DataStatusMessage type="empty" />;
+    }
+
+    return campaigns.map((c) => (
+      <CampaignCard
+        key={c.id}
+        campaign={c}
+        expanded={currentlyExpanded === c.id}
+        setCurrentlyExpanded={setCurrentlyExpanded}
+        onUpdate={(updates) => handleUpdateCampaign(c.id, updates)}
+        onDelete={() => handleDeleteCampaign(c.id)}
+      />
+    ));
+  };
+
   return (
     <MainLayout>
       <div className={styles.headerWrapper}>
@@ -88,22 +112,7 @@ const CampaignList = () => {
           onSave={handleCreateCampaign}
         />
       </div>
-      <div className={styles.list}>
-        {isLoading || !campaigns.length ? (
-          <DataStatusMessage type={isLoading ? "loading" : "empty"} />
-        ) : (
-          campaigns.map((c) => (
-            <CampaignCard
-              key={c.id}
-              campaign={c}
-              expanded={currentlyExpanded === c.id}
-              setCurrentlyExpanded={setCurrentlyExpanded}
-              onUpdate={(updates) => handleUpdateCampaign(c.id, updates)}
-              onDelete={() => handleDeleteCampaign(c.id)}
-            />
-          ))
-        )}
-      </div>
+      <div className={styles.list}>{renderCampaignListContent()}</div>
     </MainLayout>
   );
 };
