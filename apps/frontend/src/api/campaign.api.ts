@@ -1,7 +1,6 @@
 import { CampaignType } from "@shared/types";
 
-// TODO move to env
-const API_URL = "http://localhost:3001/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001/api";
 
 export const campaignApi = {
   getAllCampaigns: async (): Promise<CampaignType[]> => {
