@@ -7,10 +7,10 @@ import { useState, useEffect } from "react";
 import { Button } from "@ui/Button/Button";
 import EditCampaignDialog from "../../ui/EditCampaignDialog/EditCampaignDialog";
 import { campaignApi } from "../../api/campaign.api";
+import DataStatusMessage from "./components/DataStatusMessage/DataStatusMessage";
 
 const CampaignList = () => {
   const [campaigns, setCampaigns] = useState<CampaignType[]>([]);
-  // TODO add loading component
   const [isLoading, setIsLoading] = useState(true);
   // TODO add error component
   const [error, setError] = useState<string | null>(null);
@@ -79,22 +79,30 @@ const CampaignList = () => {
         <h2>Campaign List</h2>
 
         <EditCampaignDialog
-          triggerElement={<Button variant="primary">Add new campaign</Button>}
+          triggerElement={
+            <Button disabled={isLoading} variant="primary">
+              Add new campaign
+            </Button>
+          }
           isCreating
           onSave={handleCreateCampaign}
         />
       </div>
       <div className={styles.list}>
-        {campaigns.map((c) => (
-          <CampaignCard
-            key={c.id}
-            campaign={c}
-            expanded={currentlyExpanded === c.id}
-            setCurrentlyExpanded={setCurrentlyExpanded}
-            onUpdate={(updates) => handleUpdateCampaign(c.id, updates)}
-            onDelete={() => handleDeleteCampaign(c.id)}
-          />
-        ))}
+        {isLoading || !campaigns.length ? (
+          <DataStatusMessage type={isLoading ? "loading" : "empty"} />
+        ) : (
+          campaigns.map((c) => (
+            <CampaignCard
+              key={c.id}
+              campaign={c}
+              expanded={currentlyExpanded === c.id}
+              setCurrentlyExpanded={setCurrentlyExpanded}
+              onUpdate={(updates) => handleUpdateCampaign(c.id, updates)}
+              onDelete={() => handleDeleteCampaign(c.id)}
+            />
+          ))
+        )}
       </div>
     </MainLayout>
   );
