@@ -5,6 +5,7 @@ import styles from "./CampaignList.module.scss";
 import { CampaignType } from "@shared/types";
 import { useState } from "react";
 import { Button } from "@ui/Button/Button";
+import EditCampaignDialog from "../../ui/EditCampaignDialog/EditCampaignDialog";
 
 const exampleCampaigns: CampaignType[] = [
   {
@@ -168,7 +169,14 @@ const CampaignList = () => {
     <MainLayout>
       <div className={styles.headerWrapper}>
         <h2>Campaign List</h2>
-        <Button variant="primary">Add new campaign</Button>
+
+        <EditCampaignDialog
+          triggerElement={<Button variant="primary">Add new campaign</Button>}
+          isCreating
+          onSave={() => {
+            console.log("TODO");
+          }}
+        />
       </div>
       <div className={styles.list}>
         {exampleCampaigns.map((c) => (

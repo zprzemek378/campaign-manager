@@ -5,10 +5,10 @@ import clsx from "clsx";
 import MoneyView from "./components/MoneyView/MoneyView";
 import StatusIndicator from "./components/StatusIndicator/StatusIndicator";
 import LocationIndicator from "./LocationIndicator/LocationIndicator";
-import { FaMoneyBillWave, FaCoins } from "react-icons/fa";
+import { FaMoneyBillWave, FaCoins, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useLayoutEffect, useRef } from "react";
-import EditCampaignDialog from "./components/EditCampaignDialog/EditCampaignDialog";
+import EditCampaignDialog from "../../../../ui/EditCampaignDialog/EditCampaignDialog";
 
 type CampaignCardProps = {
   campaign: CampaignType;
@@ -79,6 +79,7 @@ const CampaignCard = ({
         <div className={styles.editDeleteIcons}>
           <button>
             <EditCampaignDialog
+              triggerElement={<FaEdit size={20} />}
               campaign={campaign}
               onSave={() => {
                 console.log("TODO");

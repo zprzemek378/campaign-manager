@@ -7,16 +7,55 @@ import {
   DialogLabel,
 } from "@ui/CustomDialog/DialogFormControls";
 import { useState, useRef } from "react";
-import { FaEdit } from "react-icons/fa";
 import ToggleCheckbox from "@ui/ToggleCheckbox/ToggleCheckbox";
 
-type EditCampaignDialogProps = {
-  campaign: CampaignType;
-  onSave: (updated: CampaignType) => void;
+const dialogProps = {
+  false: {
+    title: "Edit Campaign",
+    description: "Modify the campaign details and save your changes.",
+    saveText: "Save Changes",
+  },
+  true: {
+    title: "Create Campaign",
+    description: "Fill in the details to create a new campaign.",
+    saveText: "Create Campaign",
+  },
 };
 
-const EditCampaignDialog = ({ campaign, onSave }: EditCampaignDialogProps) => {
-  const [form, setForm] = useState({ ...campaign });
+const emptyCampaign: CampaignType = {
+  id: "",
+  name: "",
+  keyWords: [],
+  bidAmount: 0,
+  campaignFund: 0,
+  isActive: false,
+  town: TOWNS[0].id,
+  radiusInKm: 0,
+};
+
+type EditCampaignDialogProps =
+  | {
+      isCreating: true;
+      campaign?: CampaignType;
+      onSave: (newCampaign: CampaignType) => void;
+      triggerElement: React.ReactNode;
+    }
+  | {
+      isCreating?: false;
+      campaign: CampaignType;
+      onSave: (updated: CampaignType) => void;
+      triggerElement: React.ReactNode;
+    };
+
+const EditCampaignDialog = ({
+  campaign,
+  onSave,
+  isCreating = false,
+  triggerElement,
+}: EditCampaignDialogProps) => {
+  const [form, setForm] = useState<CampaignType>(
+    isCreating ? { ...emptyCampaign } : { ...campaign! }
+  );
   const formRef = useRef<HTMLFormElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -49,10 +88,8 @@ const EditCampaignDialog = ({ campaign, onSave }: EditCampaignDialogProps) => {
 
   return (
     <CustomDialog
-      triggerElement={<FaEdit size={20} />}
-      title="Edit Campaign"
-      description="Modify the campaign details and save your changes."
-      saveText="Save Changes"
+      triggerElement={triggerElement}
+      {...dialogProps[String(isCreating) as "true" | "false"]}
       formRef={formRef}
       open={open}
       onOpenChange={setOpen}
