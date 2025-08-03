@@ -1,4 +1,4 @@
-import { TOWNS } from "constants";
+import { TOWNS } from "./constants";
 
 export type TownId = (typeof TOWNS)[number]["id"];
 
