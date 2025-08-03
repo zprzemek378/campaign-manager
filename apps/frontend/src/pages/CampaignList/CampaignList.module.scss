@@ -4,6 +4,12 @@
   justify-content: space-between;
   align-items: center;
 
+  @media screen and (max-width: 420px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
   h2 {
     margin: 0;
     padding: 0;
@@ -14,4 +20,8 @@
   display: flex;
   flex-wrap: wrap;
   margin: 1rem;
+
+  @media screen and (max-width: 410px) {
+    flex-direction: column;
+  }
 }

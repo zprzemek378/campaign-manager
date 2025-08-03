@@ -12,6 +12,11 @@
   transition: background-color 0.2s ease;
   margin-top: 1rem;
 
+  @media screen and (max-width: 350px) {
+    flex-direction: column;
+    gap: 0;
+  }
+
   &:hover {
     background-color: lightly-lighten($bg-color);
   }
