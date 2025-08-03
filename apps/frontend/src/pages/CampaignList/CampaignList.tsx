@@ -4,6 +4,7 @@ import CampaignCard from "./components/CampaignCard/CampaignCard";
 import styles from "./CampaignList.module.scss";
 import { CampaignType } from "@shared/types";
 import { useState } from "react";
+import { Button } from "@ui/Button/Button";
 
 const exampleCampaigns: CampaignType[] = [
   {
@@ -65,6 +66,7 @@ const CampaignList = () => {
 
   return (
     <MainLayout>
+      <Button variant="outlined">Add new campaign</Button>
       <div className={styles.list}>
         {exampleCampaigns.map((c) => (
           <CampaignCard

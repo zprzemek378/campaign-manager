@@ -6,7 +6,7 @@ import {
   DialogInput,
   DialogLabel,
 } from "@ui/CustomDialog/DialogFormControls";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { FaEdit } from "react-icons/fa";
 import ToggleCheckbox from "@ui/ToggleCheckbox/ToggleCheckbox";
 
@@ -17,6 +17,8 @@ type EditCampaignDialogProps = {
 
 const EditCampaignDialog = ({ campaign, onSave }: EditCampaignDialogProps) => {
   const [form, setForm] = useState({ ...campaign });
+  const formRef = useRef<HTMLFormElement>(null);
+  const [open, setOpen] = useState(false);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -42,6 +44,7 @@ const EditCampaignDialog = ({ campaign, onSave }: EditCampaignDialogProps) => {
 
   const handleSave = () => {
     onSave(form);
+    setOpen(false);
   };
 
   return (
@@ -50,8 +53,12 @@ const EditCampaignDialog = ({ campaign, onSave }: EditCampaignDialogProps) => {
       title="Edit Campaign"
       description="Modify the campaign details and save your changes."
       saveText="Save Changes"
+      formRef={formRef}
+      open={open}
+      onOpenChange={setOpen}
     >
       <form
+        ref={formRef}
         onSubmit={(e) => {
           e.preventDefault();
           handleSave();
