@@ -8,7 +8,7 @@ import {
 } from "@ui/CustomDialog/DialogFormControls";
 import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
-import ToggleCheckbox from "@ui/CustomDialog/ToggleCheckbox/ToggleCheckbox";
+import ToggleCheckbox from "@ui/ToggleCheckbox/ToggleCheckbox";
 
 type EditCampaignDialogProps = {
   campaign: CampaignType;

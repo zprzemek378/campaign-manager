@@ -1,4 +1,3 @@
-import React from "react";
 import { FaToggleOff, FaToggleOn } from "react-icons/fa6";
 import styles from "./ToggleCheckbox.module.scss";
 
