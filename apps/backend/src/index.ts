@@ -33,5 +33,5 @@ app.use(
 );
 
 app.listen(port, () => {
-  console.log(`Backend listening on http://localhost:${port}`);
+  console.log(`Backend listening...`);
 });
