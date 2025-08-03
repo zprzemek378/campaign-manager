@@ -45,7 +45,7 @@ const CampaignCard = ({
     setCurrentlyExpanded(expanded ? null : campaign.id);
 
   return (
-    <div className={styles.card}>
+    <div className={clsx(styles.card, !campaign.isActive && styles.inactive)}>
       <div className={styles.cardHeader}>
         <h2>{campaign.name}</h2>
         <StatusIndicator isActive={campaign.isActive} />

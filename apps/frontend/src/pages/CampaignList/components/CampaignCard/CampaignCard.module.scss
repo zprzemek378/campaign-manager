@@ -10,6 +10,11 @@
   min-width: 300px;
   flex: 1;
 
+  &.inactive {
+    filter: grayscale(70%);
+    border-color: gray;
+  }
+
   h2 {
     margin: 0.75rem 0;
     max-width: calc(100% - 80px);
