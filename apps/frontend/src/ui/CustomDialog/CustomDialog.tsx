@@ -51,8 +51,12 @@ const CustomDialog = ({
               display: "flex",
               marginTop: 25,
               justifyContent: "flex-end",
+              gap: "1rem",
             }}
           >
+            <Dialog.Close asChild>
+              <Button variant="outlined">Cancel</Button>
+            </Dialog.Close>
             <Button variant="accent" onClick={handleSaveClick}>
               {saveText}
             </Button>

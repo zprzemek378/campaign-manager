@@ -8,8 +8,10 @@ import LocationIndicator from "./LocationIndicator/LocationIndicator";
 import { FaMoneyBillWave, FaCoins, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { useLayoutEffect, useRef } from "react";
-import EditCampaignDialog from "../../../../ui/EditCampaignDialog/EditCampaignDialog";
+
 import Pill from "@ui/Pill/Pill";
+import AreYouSureDialog from "@ui/AreYouSureDialog/AreYouSureDialog";
+import EditCampaignDialog from "@ui/EditCampaignDialog/EditCampaignDialog";
 
 type CampaignCardProps = {
   campaign: CampaignType;
@@ -82,17 +84,24 @@ const CampaignCard = ({
 
       <div className={styles.iconsWrapper}>
         <div className={styles.editDeleteIcons}>
-          <button>
-            <EditCampaignDialog
-              triggerElement={<FaEdit size={20} />}
-              campaign={campaign}
-              onSave={onUpdate}
-            />
-          </button>
-          <button onClick={onDelete}>
-            {/* TODO add Are-You-Sure Dialog before deleting */}
-            <MdDelete size={20} />
-          </button>
+          <EditCampaignDialog
+            triggerElement={
+              <button>
+                <FaEdit size={20} />
+              </button>
+            }
+            campaign={campaign}
+            onSave={onUpdate}
+          />
+          <AreYouSureDialog
+            triggerElement={
+              <button>
+                <MdDelete size={20} />
+              </button>
+            }
+            onConfirm={onDelete}
+            itemName={campaign.name}
+          />
         </div>
         <button
           onClick={toggleCurrentlyExpanded}
