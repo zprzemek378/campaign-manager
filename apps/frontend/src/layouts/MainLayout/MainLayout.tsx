@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
 import { FaGem } from "react-icons/fa";
+import { formatMoney } from "@utils/formatMoney";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -32,7 +33,8 @@ const MainLayout = ({ children, gemQuantity, className }: MainLayoutProps) => {
           <Link to="/">Campaign List</Link>
           <Link to="/info">Information</Link>
           <div className={styles.gems}>
-            <FaGem className={styles.gemIcon} size={32} /> {gemQuantity}
+            <FaGem className={styles.gemIcon} size={32} />
+            {formatMoney(gemQuantity)}
           </div>
         </nav>
 
