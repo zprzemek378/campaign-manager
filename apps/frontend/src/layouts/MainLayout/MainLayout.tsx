@@ -3,6 +3,7 @@ import styles from "./MainLayout.module.scss";
 import clsx from "clsx";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import { FaGem } from "react-icons/fa";
 
 type MainLayoutProps = {
   children: React.ReactNode;
@@ -14,7 +15,9 @@ const MainLayout = ({ children, className }: MainLayoutProps) => {
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
-        <div className={styles.logo}>Campaign Manager</div>
+        <div className={styles.logo}>
+          <span className={styles.logoAccentLetter}>C</span>Manager
+        </div>
         <button
           className={styles.burger}
           onClick={() => setMenuOpen((open) => !open)}
@@ -27,7 +30,11 @@ const MainLayout = ({ children, className }: MainLayoutProps) => {
         >
           <Link to="/">Campaign List</Link>
           <Link to="/info">Informations</Link>
+          <div className={styles.gems}>
+            <FaGem className={styles.gemIcon} size={32} /> 3819230
+          </div>
         </nav>
+
         {menuOpen && (
           <div className={styles.overlay} onClick={() => setMenuOpen(false)} />
         )}

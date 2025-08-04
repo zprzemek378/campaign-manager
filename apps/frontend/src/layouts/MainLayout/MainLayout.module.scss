@@ -6,6 +6,20 @@
   color: $text-color;
 }
 
+.gems {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 2rem;
+
+  .gemIcon {
+    padding-top: 4px;
+    color: $accent-color;
+  }
+}
+
 .header {
   background-color: $primary-color;
   color: $text-on-dark-color;
@@ -16,11 +30,17 @@
 
   .logo {
     font-family: "Bebas Neue", sans-serif;
-    font-weight: 700;
-    font-size: 3rem;
+
+    font-size: 2.4rem;
     line-height: 1;
-    margin: 0.5rem 3rem 0.25rem 2rem;
+    margin: 0.5rem 1rem 0.25rem 2rem;
     z-index: 102;
+    color: $text-on-dark-color;
+
+    .logoAccentLetter {
+      font-size: 3rem;
+      color: $accent-color;
+    }
   }
 
   .burger {
@@ -102,7 +122,11 @@
   }
 }
 
-@media (min-width: 801px) {
+@media (min-width: 768px) {
+  .gems {
+    margin: 0 1rem;
+  }
+
   .header {
     .burger {
       display: none;
@@ -117,6 +141,7 @@
       transform: none;
       box-shadow: none;
       background: none;
+      align-items: center;
 
       a {
         width: auto;
