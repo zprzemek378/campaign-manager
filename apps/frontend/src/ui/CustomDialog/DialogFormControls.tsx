@@ -12,7 +12,9 @@ type DialogLabelProps = {
   children?: React.ReactNode;
 };
 
-type DialogInputProps = React.InputHTMLAttributes<HTMLInputElement>;
+type DialogInputProps = React.InputHTMLAttributes<HTMLInputElement> & {
+  error?: string;
+};
 
 export const DialogFieldset = ({
   children,
@@ -35,12 +37,16 @@ export const DialogLabel = ({ htmlFor, children }: DialogLabelProps) => (
 );
 
 export const DialogInput = React.forwardRef<HTMLInputElement, DialogInputProps>(
-  ({ className, ...props }, ref) => (
-    <input
-      ref={ref}
-      className={`${styles.Input} ${className ?? ""}`}
-      {...props}
-    />
+  ({ className, error, ...props }, ref) => (
+    <div className={styles.InputWrapper}>
+      <input
+        ref={ref}
+        className={`${styles.Input} ${className ?? ""} ${error ? styles.InputError : ""}`}
+        {...props}
+      />
+
+      {error && <span className={styles.ErrorMessage}>{error}</span>}
+    </div>
   )
 );
 DialogInput.displayName = "DialogInput";

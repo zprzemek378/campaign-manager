@@ -12,10 +12,11 @@ import { MdAddCircle } from "react-icons/md";
 type KeywordsProps = {
   value: string[];
   onChange: (newKeywords: string[]) => void;
-  isKeywordError: boolean;
+  error: string;
+  resetError: () => void;
 };
 
-const Keywords = ({ value, onChange, isKeywordError }: KeywordsProps) => {
+const Keywords = ({ value, onChange, error, resetError }: KeywordsProps) => {
   const [input, setInput] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -40,6 +41,7 @@ const Keywords = ({ value, onChange, isKeywordError }: KeywordsProps) => {
     }
     setInput("");
     setShowSuggestions(false);
+    resetError();
   };
 
   const handleRemove = (keyword: string) => {
@@ -50,12 +52,6 @@ const Keywords = ({ value, onChange, isKeywordError }: KeywordsProps) => {
     <>
       <DialogFieldset reduceMarginBottom>
         <DialogLabel />
-
-        {!value.length && isKeywordError && (
-          <div className={styles.errorBar}>
-            You have to add at least one keyword!
-          </div>
-        )}
 
         <div className={styles.keywordList}>
           {value.map((k) => (
@@ -73,6 +69,7 @@ const Keywords = ({ value, onChange, isKeywordError }: KeywordsProps) => {
             id="keyword"
             name="keyword"
             value={input}
+            error={error}
             onChange={(e) => setInput(e.target.value)}
             onFocus={() => setShowSuggestions(true)}
             onBlur={() => setShowSuggestions(false)}

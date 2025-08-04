@@ -9,41 +9,15 @@ import {
 import { useState, useRef } from "react";
 import ToggleCheckbox from "@ui/ToggleCheckbox/ToggleCheckbox";
 import Keywords from "./components/Keywords/Keywords";
-
-const dialogProps = {
-  false: {
-    title: "Edit Campaign",
-    description: "Modify the campaign details and save your changes.",
-    saveText: "Save Changes",
-  },
-  true: {
-    title: "Create Campaign",
-    description: "Fill in the details to create a new campaign.",
-    saveText: "Create Campaign",
-  },
-};
-
-type CampaignFormState = Omit<
-  CampaignType,
-  "bidAmount" | "campaignFund" | "radiusInKm"
-> & {
-  bidAmount: string;
-  campaignFund: string;
-  radiusInKm: string;
-};
-
-const decimalFields = ["bidAmount", "campaignFund", "radiusInKm"];
-
-const emptyCampaign: CampaignFormState = {
-  id: "",
-  name: "",
-  keyWords: [],
-  bidAmount: "",
-  campaignFund: "",
-  isActive: false,
-  town: TOWNS[0].id,
-  radiusInKm: "",
-};
+import {
+  CampaignErrorsType,
+  CampaignFormState,
+  decimalFields,
+  dialogProps,
+  emptyCampaign,
+  emptyCampaignErrors,
+  handleNumericInput,
+} from "./helpers";
 
 type EditCampaignDialogProps =
   | {
@@ -77,17 +51,7 @@ const EditCampaignDialog = ({
   );
   const formRef = useRef<HTMLFormElement>(null);
   const [open, setOpen] = useState(false);
-  const [isKeywordError, setIsKeywordError] = useState(false);
-
-  const handleNumericInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const input = (e.nativeEvent as InputEvent).data;
-
-    const isAllowed = input === null || /^[0-9.,]$/.test(input);
-
-    if (!isAllowed) {
-      e.preventDefault();
-    }
-  };
+  const [errors, setErrors] = useState<CampaignErrorsType>(emptyCampaignErrors);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -123,12 +87,43 @@ const EditCampaignDialog = ({
   };
 
   const isValid = () => {
-    if (!form.keyWords.length) {
-      setIsKeywordError(true);
-      return false;
+    const newErrors: CampaignErrorsType = emptyCampaignErrors;
+    let isValid = true;
+
+    if (!form.name.trim()) {
+      newErrors.name = "Name is required";
+      isValid = false;
     }
 
-    return true;
+    if (!form.keyWords.length) {
+      newErrors.keyWords = "You have to add at least 1 keyword";
+      isValid = false;
+    }
+
+    const bidAmount = parseFloat(form.bidAmount);
+    if (isNaN(bidAmount) || bidAmount < 0.1) {
+      newErrors.bidAmount = "Bid amount must be at least 0.1";
+      isValid = false;
+    }
+
+    const campaignFund = parseFloat(form.campaignFund);
+    if (isNaN(campaignFund) || campaignFund <= 0) {
+      newErrors.campaignFund = "Campaign fund must be greater than 0";
+      isValid = false;
+    }
+
+    const radius = parseFloat(form.radiusInKm);
+    if (isNaN(radius) || radius <= 0) {
+      newErrors.radiusInKm = "Radius must be greater than 0";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  const resetKeyWordError = () => {
+    setErrors((prev) => ({ ...prev, keyWords: "" }));
   };
 
   return (
@@ -153,6 +148,7 @@ const EditCampaignDialog = ({
             name="name"
             value={form.name}
             onChange={handleChange}
+            error={errors.name}
             required
           />
         </DialogFieldset>
@@ -162,7 +158,8 @@ const EditCampaignDialog = ({
           onChange={(newKeywords) =>
             setForm((prev) => ({ ...prev, keyWords: newKeywords }))
           }
-          isKeywordError={isKeywordError}
+          error={errors.keyWords}
+          resetError={resetKeyWordError}
         />
 
         <DialogFieldset>
@@ -176,6 +173,7 @@ const EditCampaignDialog = ({
             value={form.bidAmount}
             onChange={handleChange}
             onBeforeInput={handleNumericInput}
+            error={errors.bidAmount}
             required
           />
         </DialogFieldset>
@@ -190,6 +188,7 @@ const EditCampaignDialog = ({
             value={form.campaignFund}
             onChange={handleChange}
             onBeforeInput={handleNumericInput}
+            error={errors.campaignFund}
             required
           />
         </DialogFieldset>
@@ -232,6 +231,7 @@ const EditCampaignDialog = ({
             value={form.radiusInKm}
             onChange={handleChange}
             onBeforeInput={handleNumericInput}
+            error={errors.radiusInKm}
             required
           />
         </DialogFieldset>

@@ -86,10 +86,14 @@ input {
   text-align: right;
 }
 
-.Input {
+.InputWrapper {
   width: 100%;
   flex: 1;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+}
+
+.Input {
   align-items: center;
   justify-content: center;
   border-radius: 4px;
@@ -100,9 +104,24 @@ input {
   background-color: $bg-color;
   box-shadow: 0 0 0 1px $accent-color;
   height: 35px;
+  background-color: white;
 }
 .Input:focus {
   box-shadow: 0 0 0 2px lightly-lighten($accent-color);
+}
+
+.Input.InputError {
+  box-shadow: 0 0 0 1px #ff4444;
+}
+
+.Input.InputError:focus {
+  box-shadow: 0 0 0 2px rgba(255, 68, 68, 0.6);
+}
+
+.ErrorMessage {
+  color: #ff4444;
+  font-size: 12px;
+  margin-top: 4px;
 }
 
 @keyframes overlayShow {
