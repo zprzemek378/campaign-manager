@@ -98,6 +98,11 @@ const CampaignList = ({
   };
 
   const handleDeleteCampaign = async (id: string) => {
+    const foundCampaign = campaigns.find((c) => c.id === id);
+    if (foundCampaign) {
+      reduceGemQuantity(-foundCampaign.campaignFund);
+    }
+
     try {
       await campaignApi.deleteCampaign(id);
       fetchCampaigns();
