@@ -30,7 +30,7 @@ const MainLayout = ({ children, gemQuantity, className }: MainLayoutProps) => {
           onClick={() => setMenuOpen(false)}
         >
           <Link to="/">Campaign List</Link>
-          <Link to="/info">Informations</Link>
+          <Link to="/info">Information</Link>
           <div className={styles.gems}>
             <FaGem className={styles.gemIcon} size={32} /> {gemQuantity}
           </div>

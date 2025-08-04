@@ -1,0 +1,60 @@
+.container {
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.title {
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+
+  h2 {
+    margin: 0;
+    padding: 0.3rem 0;
+    color: var(--primary-color);
+  }
+}
+
+.content {
+  h3 {
+    color: var(--primary-color);
+    margin: 2rem 0 1rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  h4 {
+    color: var(--accent-color);
+    margin: 1.5rem 0 1rem;
+  }
+
+  p {
+    line-height: 1.6;
+    margin: 1rem 0;
+  }
+
+  ul,
+  ol {
+    margin: 1rem 0;
+    padding-left: 2rem;
+    line-height: 1.6;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    ul {
+      margin: 0.5rem 0;
+    }
+  }
+
+  strong {
+    color: var(--accent-color);
+    font-weight: 600;
+  }
+}
