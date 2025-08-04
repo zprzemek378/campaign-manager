@@ -90,7 +90,10 @@ const EditCampaignDialog = ({
         }));
         return;
       }
+
       setOpen(false);
+      setErrors({ ...emptyCampaignErrors });
+      if (isCreating) setForm({ ...emptyCampaign });
     }
   };
 
