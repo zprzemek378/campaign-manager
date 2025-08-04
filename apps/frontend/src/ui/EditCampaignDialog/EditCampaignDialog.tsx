@@ -23,13 +23,13 @@ type EditCampaignDialogProps =
   | {
       isCreating: true;
       campaign?: CampaignType;
-      onSave: (newCampaign: CampaignType) => void;
+      onSave: (newCampaign: CampaignType) => boolean | void;
       triggerElement: React.ReactNode;
     }
   | {
       isCreating?: false;
       campaign: CampaignType;
-      onSave: (updated: CampaignType) => void;
+      onSave: (updated: CampaignType) => boolean | void;
       triggerElement: React.ReactNode;
     };
 
@@ -51,7 +51,9 @@ const EditCampaignDialog = ({
   );
   const formRef = useRef<HTMLFormElement>(null);
   const [open, setOpen] = useState(false);
-  const [errors, setErrors] = useState<CampaignErrorsType>(emptyCampaignErrors);
+  const [errors, setErrors] = useState<CampaignErrorsType>({
+    ...emptyCampaignErrors,
+  });
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -81,13 +83,19 @@ const EditCampaignDialog = ({
         radiusInKm: parseFloat(form.radiusInKm as string),
       };
 
-      onSave(parsedForm);
+      if (!onSave(parsedForm)) {
+        setErrors((prev) => ({
+          ...prev,
+          campaignFund: "Exceeded available gem quantity",
+        }));
+        return;
+      }
       setOpen(false);
     }
   };
 
   const isValid = () => {
-    const newErrors: CampaignErrorsType = emptyCampaignErrors;
+    const newErrors: CampaignErrorsType = { ...emptyCampaignErrors };
     let isValid = true;
 
     if (!form.name.trim()) {

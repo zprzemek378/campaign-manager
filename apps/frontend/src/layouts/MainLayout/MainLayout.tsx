@@ -7,10 +7,11 @@ import { FaGem } from "react-icons/fa";
 
 type MainLayoutProps = {
   children: React.ReactNode;
+  gemQuantity: number;
   className?: string;
 };
 
-const MainLayout = ({ children, className }: MainLayoutProps) => {
+const MainLayout = ({ children, gemQuantity, className }: MainLayoutProps) => {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className={styles.layout}>
@@ -31,7 +32,7 @@ const MainLayout = ({ children, className }: MainLayoutProps) => {
           <Link to="/">Campaign List</Link>
           <Link to="/info">Informations</Link>
           <div className={styles.gems}>
-            <FaGem className={styles.gemIcon} size={32} /> 3819230
+            <FaGem className={styles.gemIcon} size={32} /> {gemQuantity}
           </div>
         </nav>
 

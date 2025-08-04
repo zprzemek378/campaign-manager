@@ -9,7 +9,15 @@ import EditCampaignDialog from "../../ui/EditCampaignDialog/EditCampaignDialog";
 import { campaignApi } from "../../api/campaign.api";
 import DataStatusMessage from "./components/DataStatusMessage/DataStatusMessage";
 
-const CampaignList = () => {
+type CampaignListProps = {
+  gemQuantity: number;
+  reduceGemQuantity: (quantity: number) => boolean;
+};
+
+const CampaignList = ({
+  gemQuantity,
+  reduceGemQuantity,
+}: CampaignListProps) => {
   const [campaigns, setCampaigns] = useState<CampaignType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>("");
@@ -47,6 +55,13 @@ const CampaignList = () => {
     }
   };
 
+  const attemptCreateCampaign = (newCampaign: Omit<CampaignType, "id">) => {
+    if (!reduceGemQuantity(newCampaign.campaignFund)) return false;
+
+    handleCreateCampaign(newCampaign);
+    return true;
+  };
+
   const handleUpdateCampaign = async (
     id: string,
     updates: Partial<CampaignType>
@@ -59,6 +74,27 @@ const CampaignList = () => {
         err instanceof Error ? err.message : "Failed to update campaign"
       );
     }
+  };
+
+  const attemptUpdateCampaign = (
+    id: string,
+    updates: Partial<CampaignType>
+  ): boolean => {
+    if (updates.campaignFund !== undefined) {
+      const previousCampaignFund = campaigns.find(
+        (c) => c.id === id
+      )?.campaignFund;
+      if (!previousCampaignFund) return false;
+
+      const newCampaignFund = updates.campaignFund;
+      const difference = newCampaignFund - previousCampaignFund;
+
+      if (!reduceGemQuantity(difference)) return false;
+    }
+
+    handleUpdateCampaign(id, updates);
+
+    return true;
   };
 
   const handleDeleteCampaign = async (id: string) => {
@@ -91,14 +127,14 @@ const CampaignList = () => {
         campaign={c}
         expanded={currentlyExpanded === c.id}
         setCurrentlyExpanded={setCurrentlyExpanded}
-        onUpdate={(updates) => handleUpdateCampaign(c.id, updates)}
+        onUpdate={(updates) => attemptUpdateCampaign(c.id, updates)}
         onDelete={() => handleDeleteCampaign(c.id)}
       />
     ));
   };
 
   return (
-    <MainLayout>
+    <MainLayout gemQuantity={gemQuantity}>
       <div className={styles.headerWrapper}>
         <h2>Campaign List</h2>
 
@@ -109,7 +145,7 @@ const CampaignList = () => {
             </Button>
           }
           isCreating
-          onSave={handleCreateCampaign}
+          onSave={attemptCreateCampaign}
         />
       </div>
       <div className={styles.list}>{renderCampaignListContent()}</div>
