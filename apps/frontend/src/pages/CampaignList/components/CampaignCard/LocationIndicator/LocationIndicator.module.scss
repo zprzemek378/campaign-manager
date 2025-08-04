@@ -1,20 +1,21 @@
 .container {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  gap: 0;
   background-color: $bg-color;
   border: 1px solid $primary-color;
   border-radius: 8px;
   padding: 0.5rem 1rem;
+  align-items: center;
 
   font-size: 0.875rem;
   color: $text-color;
   transition: background-color 0.2s ease;
   margin-top: 1rem;
 
-  @media screen and (max-width: 350px) {
-    flex-direction: column;
-    gap: 0;
+  @media screen and (min-width: 351px) {
+    flex-direction: row;
+    gap: 8px;
   }
 
   &:hover {

@@ -12,6 +12,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  justify-content: space-between;
 
   .logo {
     font-family: "Bebas Neue", sans-serif;
@@ -23,7 +24,7 @@
   }
 
   .burger {
-    display: none;
+    display: block;
     background: none;
     border: none;
     color: $text-on-dark-color;
@@ -34,16 +35,30 @@
   }
 
   .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background: $primary-color;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 5rem;
+    gap: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -2px 0 16px rgba(0, 0, 0, 0.08);
+    z-index: 200;
     display: flex;
-    gap: 1rem;
-    z-index: 102;
+
     a {
       color: $text-on-dark-color;
       text-decoration: none;
       position: relative;
-      padding: 1rem 3rem;
+      width: 100%;
+      padding: 1.5rem 2rem;
       background-color: $primary-color;
-      border-radius: 16px;
+      border-radius: 0;
       transition:
         color 0.3s ease,
         background-color 0.3s ease;
@@ -66,62 +81,55 @@
       }
 
       &:hover::after {
-        width: 80%;
+        width: 60%;
       }
     }
+  }
+
+  .nav.open {
+    transform: translateX(0);
   }
 
   .overlay {
-    display: none;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 101;
   }
 }
 
-@media (max-width: 800px) {
+@media (min-width: 801px) {
   .header {
     .burger {
-      display: block;
+      display: none;
     }
     .nav {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100vh;
-      width: 250px;
-      background: $primary-color;
-      flex-direction: column;
-      align-items: flex-start;
-      padding-top: 5rem;
-      gap: 2rem;
-      transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: -2px 0 16px rgba(0, 0, 0, 0.08);
-      z-index: 200;
-      a {
-        width: 100%;
-        padding: 1.5rem 2rem;
-        border-radius: 0;
+      position: static;
+      height: auto;
+      width: auto;
+      flex-direction: row;
+      padding-top: 0;
+      gap: 1rem;
+      transform: none;
+      box-shadow: none;
+      background: none;
 
-        &::after {
-          left: 10%;
-        }
+      a {
+        width: auto;
+        padding: 1rem 3rem;
+        border-radius: 16px;
 
         &:hover::after {
-          width: 60%;
+          width: 80%;
         }
       }
     }
-    .nav.open {
-      transform: translateX(0);
-    }
     .overlay {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 101;
+      display: none;
     }
   }
 }
