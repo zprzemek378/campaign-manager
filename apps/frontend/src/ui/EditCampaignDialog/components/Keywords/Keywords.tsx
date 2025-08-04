@@ -83,6 +83,7 @@ const Keywords = ({ value, onChange, error, resetError }: KeywordsProps) => {
             }}
           />
           <button
+            disabled={input === ""}
             className={styles.addKeywordButton}
             onClick={(e) => {
               e.preventDefault();
