@@ -30,12 +30,12 @@
 
   .logo {
     text-decoration: none;
-
     font-family: "Bebas Neue", sans-serif;
     font-size: 2.4rem;
     line-height: 1;
     margin: 0.5rem 1rem 0.25rem 2rem;
     color: $text-on-dark-color;
+    user-select: none;
 
     .logoAccentLetter {
       font-size: 3rem;
