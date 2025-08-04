@@ -17,9 +17,9 @@ const MainLayout = ({ children, gemQuantity, className }: MainLayoutProps) => {
   return (
     <div className={styles.layout}>
       <header className={styles.header}>
-        <div className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           <span className={styles.logoAccentLetter}>C</span>Manager
-        </div>
+        </Link>
         <button
           className={styles.burger}
           onClick={() => setMenuOpen((open) => !open)}
