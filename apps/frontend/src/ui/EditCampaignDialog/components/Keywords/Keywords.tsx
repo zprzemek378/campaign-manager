@@ -7,13 +7,15 @@ import {
   DialogInput,
   DialogLabel,
 } from "@ui/CustomDialog/DialogFormControls";
+import { MdAddCircle } from "react-icons/md";
 
 type KeywordsProps = {
   value: string[];
   onChange: (newKeywords: string[]) => void;
+  isKeywordError: boolean;
 };
 
-const Keywords = ({ value, onChange }: KeywordsProps) => {
+const Keywords = ({ value, onChange, isKeywordError }: KeywordsProps) => {
   const [input, setInput] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -48,6 +50,13 @@ const Keywords = ({ value, onChange }: KeywordsProps) => {
     <>
       <DialogFieldset reduceMarginBottom>
         <DialogLabel />
+
+        {!value.length && isKeywordError && (
+          <div className={styles.errorBar}>
+            You have to add at least one keyword!
+          </div>
+        )}
+
         <div className={styles.keywordList}>
           {value.map((k) => (
             <Pill key={k} text={k} onRemove={handleRemove} />
@@ -76,6 +85,17 @@ const Keywords = ({ value, onChange }: KeywordsProps) => {
               }
             }}
           />
+          <button
+            className={styles.addKeywordButton}
+            onClick={(e) => {
+              e.preventDefault();
+              if (input.trim()) {
+                handleAdd(input.trim());
+              }
+            }}
+          >
+            <MdAddCircle size={32} />
+          </button>
         </DialogFieldset>
 
         {showSuggestions && filteredSuggestions.length > 0 && (

@@ -2,17 +2,29 @@
   position: relative;
 }
 
+.errorBar {
+  color: red;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .keywordList {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 0.5rem;
 }
 
+.addKeywordButton {
+  all: unset;
+  display: flex;
+  cursor: pointer;
+}
+
 .suggestions {
   position: absolute;
   top: calc(50% - 0.0625rem);
   left: calc(90px + 1.25rem);
-  right: 0;
+  right: calc(20px + 32px);
   background-color: white;
   z-index: 10;
   max-height: 10rem;
